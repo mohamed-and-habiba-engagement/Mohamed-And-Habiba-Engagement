@@ -6,10 +6,14 @@ const CONFIG = {
   startTime: "19:00",          // 24h, Cairo time
   endTime: "23:00",
   timeLabel: "7:00 PM",        // shown on the page
+  timeLabelAr: "٧:٠٠ مساءً",
 
   venueName: "Four Season Events Hall",
+  venueNameAr: "قاعة ودار مناسبات الفور سيزون",
   venueArea: "El Mokattam, Cairo",
+  venueAreaAr: "المقطم، القاهرة",
   venueAddress: "Street 9, Al Abageyah, El Mokattam — in front of Mokattam Sports Club, next to the Mobil station",
+  venueAddressAr: "شارع ٩، الأباجية، المقطم — أمام نادي المقطم الرياضي، بجوار بنزينة موبيل",
   mapQuery: "30.0116942,31.3021322",                    // pin shown on the embedded map
   mapLink: "https://maps.app.goo.gl/RkpUmjw7H2MU6k5XA", // "Open in Google Maps" button
 };
@@ -28,10 +32,8 @@ const FIREBASE_CONFIG = {
   appId: "1:686961855378:web:eb069fbb05a3a39ed2cf4b",
 };
 
-/* ---------- Fill page from CONFIG ---------- */
-document.querySelectorAll("[data-cfg]").forEach((el) => {
-  el.textContent = CONFIG[el.dataset.cfg];
-});
+/* ---------- Fill page from CONFIG (in the current language) ---------- */
+const cfg = (key) => (I18N.lang === "ar" && CONFIG[key + "Ar"]) || CONFIG[key];
 
 const mapSrc = "https://www.google.com/maps?q=" + encodeURIComponent(CONFIG.mapQuery) + "&output=embed";
 document.getElementById("mapFrame").src = mapSrc;
@@ -39,13 +41,18 @@ document.getElementById("mapBtn").href = CONFIG.mapLink;
 
 const ymd = CONFIG.date.replace(/-/g, "");
 const hm = (t) => t.replace(":", "") + "00";
-document.getElementById("calBtn").href =
-  "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-  "&text=" + encodeURIComponent("Mohamed & Habiba's Engagement") +
-  "&dates=" + ymd + "T" + hm(CONFIG.startTime) + "/" + ymd + "T" + hm(CONFIG.endTime) +
-  "&ctz=Africa/Cairo" +
-  "&details=" + encodeURIComponent("We can't wait to celebrate with you! ♡") +
-  "&location=" + encodeURIComponent(CONFIG.venueName + ", " + CONFIG.venueAddress);
+
+function fillConfig() {
+  document.querySelectorAll("[data-cfg]").forEach((el) => { el.textContent = cfg(el.dataset.cfg); });
+  const ar = I18N.lang === "ar";
+  document.getElementById("calBtn").href =
+    "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+    "&text=" + encodeURIComponent(ar ? "خطوبة محمد و حبيبة" : "Mohamed & Habiba's Engagement") +
+    "&dates=" + ymd + "T" + hm(CONFIG.startTime) + "/" + ymd + "T" + hm(CONFIG.endTime) +
+    "&ctz=Africa/Cairo" +
+    "&details=" + encodeURIComponent(ar ? "في انتظاركم لنحتفل معًا ♡" : "We can't wait to celebrate with you! ♡") +
+    "&location=" + encodeURIComponent(cfg("venueName") + ", " + cfg("venueAddress"));
+}
 
 /* ---------- Fairy lights ---------- */
 document.querySelectorAll(".lights").forEach((box) => {
@@ -103,13 +110,12 @@ function tick() {
     clearInterval(timer);
     return;
   }
-  cd.d.textContent = Math.floor(diff / 864e5);
-  cd.h.textContent = String(Math.floor((diff / 36e5) % 24)).padStart(2, "0");
-  cd.m.textContent = String(Math.floor((diff / 6e4) % 60)).padStart(2, "0");
-  cd.s.textContent = String(Math.floor((diff / 1e3) % 60)).padStart(2, "0");
+  cd.d.textContent = I18N.num(Math.floor(diff / 864e5));
+  cd.h.textContent = I18N.pad(Math.floor((diff / 36e5) % 24));
+  cd.m.textContent = I18N.pad(Math.floor((diff / 6e4) % 60));
+  cd.s.textContent = I18N.pad(Math.floor((diff / 1e3) % 60));
 }
 const timer = setInterval(tick, 1000);
-tick();
 
 /* ---------- Lightbox ---------- */
 const photos = [...document.querySelectorAll(".polaroid img")].map((img) => img.src);
@@ -160,7 +166,7 @@ form.addEventListener("submit", async (e) => {
   if (!name) return;
 
   submitBtn.disabled = true;
-  note.textContent = "Sending…";
+  note.textContent = I18N.t("msg.sending");
   try {
     const { db, fs } = await firebaseReady;
     const createdAt = fs.serverTimestamp();
@@ -169,12 +175,12 @@ form.addEventListener("submit", async (e) => {
     // Public wishes wall — only the name and the wish are shown
     if (message) await fs.addDoc(fs.collection(db, "wishes"), { name, message, createdAt });
 
-    note.textContent = attending ? "Thank you! We can't wait to see you ♡" : "Thank you for letting us know ♡";
+    note.textContent = I18N.t(attending ? "msg.thanksYes" : "msg.thanksNo");
     form.reset();
     if (message) document.getElementById("wishes").scrollIntoView({ behavior: "smooth" });
   } catch (err) {
     console.error(err);
-    note.textContent = "Sorry, something went wrong — please try again in a moment.";
+    note.textContent = I18N.t("msg.error");
   } finally {
     submitBtn.disabled = false;
   }
@@ -187,15 +193,26 @@ const wishCount = document.getElementById("wishCount");
 
 function timeAgo(date) {
   const s = Math.max(1, Math.floor((Date.now() - date.getTime()) / 1000));
-  if (s < 60) return "just now";
+  if (s < 60) return I18N.t("msg.justNow");
+  const rtf = new Intl.RelativeTimeFormat(I18N.lang === "ar" ? "ar-EG" : "en", { numeric: "always" });
   const units = [["year", 31536e3], ["month", 2592e3], ["day", 864e2], ["hour", 3600], ["minute", 60]];
   for (const [unit, sec] of units) {
     const n = Math.floor(s / sec);
-    if (n >= 1) return `${n} ${unit}${n > 1 ? "s" : ""} ago`;
+    if (n >= 1) return rtf.format(-n, unit);
   }
 }
 
+function wishCountText(n) {
+  if (!n) return "";
+  if (I18N.lang !== "ar") return `${n} wish${n > 1 ? "es" : ""} and counting ♡`;
+  if (n === 1) return "تهنئة واحدة ♡";
+  if (n === 2) return "تهنئتان ♡";
+  return `${I18N.num(n)} ${n <= 10 ? "تهاني" : "تهنئة"} ♡`;
+}
+
+let lastWishes = [];
 function renderWishes(docs) {
+  lastWishes = docs;
   wishGrid.replaceChildren(
     ...docs.map((d) => {
       const w = d.data();
@@ -211,14 +228,14 @@ function renderWishes(docs) {
       who.textContent = w.name;
       const when = document.createElement("span");
       when.className = "wish-time";
-      when.textContent = w.createdAt ? timeAgo(w.createdAt.toDate()) : "just now";
+      when.textContent = w.createdAt ? timeAgo(w.createdAt.toDate()) : I18N.t("msg.justNow");
       meta.append(who, when);
       card.append(text, meta);
       return card;
     })
   );
   wishEmpty.hidden = docs.length > 0;
-  wishCount.textContent = docs.length ? `${docs.length} wish${docs.length > 1 ? "es" : ""} and counting ♡` : "";
+  wishCount.textContent = wishCountText(docs.length);
 }
 
 firebaseReady
@@ -227,3 +244,11 @@ firebaseReady
     fs.onSnapshot(q, (snap) => renderWishes(snap.docs), (err) => console.error("Wishes:", err));
   })
   .catch(() => { wishEmpty.hidden = false; });
+
+/* ---------- Language switch ---------- */
+I18N.onChange(() => {
+  fillConfig();
+  tick();
+  if (lastWishes.length) renderWishes(lastWishes);
+});
+I18N.apply();

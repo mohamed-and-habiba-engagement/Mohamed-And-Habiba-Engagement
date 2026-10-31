@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,7 +12,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="locked">
@@ -20,24 +20,30 @@
   <!-- ============ OPENING COVER ============ -->
   <div id="cover" class="cover">
     <div class="lights" data-count="45"></div>
+    <div class="lang-switch cover-lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en">EN</button><span>|</span><button type="button" data-lang="ar">AR</button>
+    </div>
     <div class="cover-inner">
-      <p class="eyebrow">You are invited</p>
+      <p class="eyebrow" data-i18n="cover.invited">You are invited</p>
       <button id="openBtn" class="seal" aria-label="Open invitation">
         <span class="seal-mono" lang="ar">ح<span class="seal-heart">♡</span>م</span>
       </button>
-      <p class="cover-names">Mohamed &amp; Habiba</p>
-      <p class="cover-hint">Tap the seal to open</p>
+      <p class="cover-names" data-i18n="names">Mohamed &amp; Habiba</p>
+      <p class="cover-hint" data-i18n="cover.hint">Tap the seal to open</p>
     </div>
   </div>
 
   <!-- ============ NAV ============ -->
   <nav class="nav" id="nav">
-    <a href="#top" class="nav-mono">M <span>&amp;</span> H</a>
+    <a href="#top" class="nav-mono" data-i18n="nav.mono">M <span>&amp;</span> H</a>
     <div class="nav-links">
-      <a href="#story">Our Story</a>
-      <a href="#details">Details</a>
-      <a href="#location">Location</a>
-      <a href="#rsvp" class="nav-cta">RSVP</a>
+      <a href="#story" data-i18n="nav.story">Our Story</a>
+      <a href="#details" data-i18n="nav.details">Details</a>
+      <a href="#location" data-i18n="nav.location">Location</a>
+      <a href="#rsvp" class="nav-cta" data-i18n="nav.rsvp">RSVP</a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="en">EN</button><span>|</span><button type="button" data-lang="ar">AR</button>
+      </div>
     </div>
   </nav>
 
@@ -46,19 +52,19 @@
     <div class="lights" data-count="70"></div>
     <div class="hero-grid">
       <div class="hero-text reveal">
-        <p class="eyebrow">Together with their families</p>
+        <p class="eyebrow" data-i18n="hero.families">Together with their families</p>
         <h1 class="names">
-          <span>Mohamed</span>
-          <span class="amp">&amp;</span>
-          <span>Habiba</span>
+          <span data-i18n="name.mohamed">Mohamed</span>
+          <span class="amp" data-i18n="name.and">&amp;</span>
+          <span data-i18n="name.habiba">Habiba</span>
         </h1>
-        <p class="hero-sub">are getting engaged</p>
+        <p class="hero-sub" data-i18n="hero.sub">are getting engaged</p>
         <div class="hero-date">
-          <span>Friday</span>
+          <span data-i18n="day">Friday</span>
           <span class="dot"></span>
-          <span>20 · 11 · 2026</span>
+          <span data-i18n="date.short">20 · 11 · 2026</span>
         </div>
-        <a href="#rsvp" class="btn btn-glow">Celebrate with us</a>
+        <a href="#rsvp" class="btn btn-glow" data-i18n="hero.cta">Celebrate with us</a>
       </div>
       <div class="hero-photo reveal">
         <div class="arch">
@@ -81,7 +87,7 @@
         “And among His signs is that He created for you mates from among yourselves,
         that you may find tranquility in them, and He placed between you affection and mercy.”
       </p>
-      <p class="ref">— Ar-Rum · 30:21</p>
+      <p class="ref" data-i18n="verse.ref">— Ar-Rum · 30:21</p>
     </div>
   </section>
 
@@ -89,27 +95,27 @@
   <section class="story" id="story">
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow dark">Our story</p>
-        <h2>Two hearts, one <em>yes</em></h2>
+        <p class="eyebrow dark" data-i18n="story.eyebrow">Our story</p>
+        <h2 data-i18n="story.title">Two hearts, one <em>yes</em></h2>
       </div>
 
       <div class="story-grid">
         <figure class="story-photo reveal">
           <img src="images/moment.jpg" alt="Mohamed giving Habiba a bouquet of pink roses" />
-          <figcaption>The moment she said yes</figcaption>
+          <figcaption data-i18n="story.caption">The moment she said yes</figcaption>
         </figure>
         <div class="story-text reveal">
-          <p class="lead">Some stories begin quietly — a glance, a smile, a conversation that never really ended.</p>
-          <p>
+          <p class="lead" data-i18n="story.lead">Some stories begin quietly — a glance, a smile, a conversation that never really ended.</p>
+          <p data-i18n="story.p1">
             Mohamed and Habiba found in each other a best friend, a safe place and a forever person.
             With a bouquet of pink roses and a lot of nervous smiles, the question was asked —
             and the answer lit up the whole room, brighter than every fairy light around them.
           </p>
-          <p>
+          <p data-i18n="story.p2">
             Now, surrounded by the people they love most, they're ready to make it official —
             and they would be honoured to have you there.
           </p>
-          <p class="signature">Mohamed &amp; Habiba</p>
+          <p class="signature" data-i18n="names">Mohamed &amp; Habiba</p>
         </div>
       </div>
     </div>
@@ -119,15 +125,16 @@
   <section class="gallery-sec">
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow dark">Little moments</p>
-        <h2>Glimpses of us</h2>
+        <p class="eyebrow dark" data-i18n="gallery.eyebrow">Little moments</p>
+        <h2 data-i18n="gallery.title">Glimpses of us</h2>
       </div>
       <div class="gallery">
-        <button class="polaroid reveal" data-index="0"><img src="images/g1.jpg" alt="Mohamed and Habiba with roses" loading="lazy" /><span>roses &amp; smiles</span></button>
-        <button class="polaroid reveal" data-index="1"><img src="images/g2.jpg" alt="A candid laugh" loading="lazy" /><span>the shy part</span></button>
-        <button class="polaroid reveal" data-index="2"><img src="images/g3.jpg" alt="Sitting together with the bouquet" loading="lazy" /><span>side by side</span></button>
-        <button class="polaroid reveal" data-index="3"><img src="images/g4.jpg" alt="Standing together" loading="lazy" /><span>officially us</span></button>
-        <button class="polaroid reveal" data-index="4"><img src="images/g5.jpg" alt="Under the fairy lights" loading="lazy" /><span>under the lights</span></button>
+        <button class="polaroid reveal" data-index="0"><img src="images/g1.jpg" alt="Mohamed and Habiba with roses" loading="lazy" /><span data-i18n="gallery.c1">roses &amp; smiles</span></button>
+        <button class="polaroid reveal" data-index="1"><img src="images/g2.jpg" alt="A candid laugh" loading="lazy" /><span data-i18n="gallery.c2">the shy part</span></button>
+        <button class="polaroid reveal" data-index="2"><img src="images/g3.jpg" alt="Sitting together with the bouquet" loading="lazy" /><span data-i18n="gallery.c3">side by side</span></button>
+        <button class="polaroid reveal" data-index="3"><img src="images/g4.jpg" alt="Standing together" loading="lazy" /><span data-i18n="gallery.c4">officially us</span></button>
+        <button class="polaroid reveal" data-index="4"><img src="images/g5.jpg" alt="Under the fairy lights" loading="lazy" /><span data-i18n="gallery.c5">under the lights</span></button>
+        <button class="polaroid reveal" data-index="5"><img src="images/g6.jpg" alt="Mohamed and Habiba on an evening out" loading="lazy" /><span data-i18n="gallery.c6">just us two</span></button>
       </div>
     </div>
   </section>
@@ -137,8 +144,8 @@
     <div class="lights" data-count="40"></div>
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow">Save the date</p>
-        <h2>The Engagement</h2>
+        <p class="eyebrow" data-i18n="details.eyebrow">Save the date</p>
+        <h2 data-i18n="details.title">The Engagement</h2>
       </div>
 
       <div class="cards">
@@ -146,38 +153,38 @@
           <div class="card-icon">
             <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
           </div>
-          <p class="card-label">Date</p>
-          <p class="card-value">Friday</p>
-          <p class="card-small">20 November 2026</p>
+          <p class="card-label" data-i18n="details.date">Date</p>
+          <p class="card-value" data-i18n="day">Friday</p>
+          <p class="card-small" data-i18n="date.long">20 November 2026</p>
         </div>
         <div class="card reveal">
           <div class="card-icon">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
           </div>
-          <p class="card-label">Time</p>
+          <p class="card-label" data-i18n="details.time">Time</p>
           <p class="card-value" data-cfg="timeLabel"></p>
-          <p class="card-small">Evening celebration</p>
+          <p class="card-small" data-i18n="details.evening">Evening celebration</p>
         </div>
         <div class="card reveal">
           <div class="card-icon">
             <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
           </div>
-          <p class="card-label">Venue</p>
+          <p class="card-label" data-i18n="details.venue">Venue</p>
           <p class="card-value" data-cfg="venueName"></p>
           <p class="card-small" data-cfg="venueArea"></p>
         </div>
       </div>
 
       <div class="countdown reveal" id="countdown">
-        <div><span id="cd-days">0</span><small>Days</small></div>
-        <div><span id="cd-hours">0</span><small>Hours</small></div>
-        <div><span id="cd-mins">0</span><small>Minutes</small></div>
-        <div><span id="cd-secs">0</span><small>Seconds</small></div>
+        <div><span id="cd-days">0</span><small data-i18n="cd.days">Days</small></div>
+        <div><span id="cd-hours">0</span><small data-i18n="cd.hours">Hours</small></div>
+        <div><span id="cd-mins">0</span><small data-i18n="cd.mins">Minutes</small></div>
+        <div><span id="cd-secs">0</span><small data-i18n="cd.secs">Seconds</small></div>
       </div>
-      <p class="countdown-done" id="countdownDone" hidden>Today is the day ♡</p>
+      <p class="countdown-done" id="countdownDone" hidden data-i18n="cd.done">Today is the day ♡</p>
 
       <div class="center reveal">
-        <a id="calBtn" class="btn btn-outline" target="_blank" rel="noopener">Add to calendar</a>
+        <a id="calBtn" class="btn btn-outline" target="_blank" rel="noopener" data-i18n="details.calendar">Add to calendar</a>
       </div>
     </div>
   </section>
@@ -186,7 +193,7 @@
   <section class="location" id="location">
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow dark">Where</p>
+        <p class="eyebrow dark" data-i18n="location.eyebrow">Where</p>
         <h2 data-cfg="venueName"></h2>
         <p class="address" data-cfg="venueAddress"></p>
       </div>
@@ -194,7 +201,7 @@
         <iframe id="mapFrame" title="Venue map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
       <div class="center reveal">
-        <a id="mapBtn" class="btn btn-rose" target="_blank" rel="noopener">Open in Google Maps</a>
+        <a id="mapBtn" class="btn btn-rose" target="_blank" rel="noopener" data-i18n="location.open">Open in Google Maps</a>
       </div>
     </div>
   </section>
@@ -204,31 +211,31 @@
     <div class="lights" data-count="35"></div>
     <div class="container narrow">
       <div class="section-head reveal">
-        <p class="eyebrow">Kindly reply</p>
-        <h2>We'd love to see you</h2>
-        <p class="muted">Please let us know if you can make it.</p>
+        <p class="eyebrow" data-i18n="rsvp.eyebrow">Kindly reply</p>
+        <h2 data-i18n="rsvp.title">We'd love to see you</h2>
+        <p class="muted" data-i18n="rsvp.sub">Please let us know if you can make it.</p>
       </div>
 
       <form class="rsvp-form reveal" id="rsvpForm">
         <label>
-          <span>Your name</span>
-          <input type="text" name="name" required placeholder="Full name" />
+          <span data-i18n="rsvp.name">Your name</span>
+          <input type="text" name="name" required placeholder="Full name" data-i18n-ph="rsvp.namePh" />
         </label>
 
         <div class="choice">
-          <span>Will you attend?</span>
+          <span data-i18n="rsvp.attend">Will you attend?</span>
           <div class="choice-row">
-            <label class="pill"><input type="radio" name="attending" value="yes" checked /><span>Joyfully accept</span></label>
-            <label class="pill"><input type="radio" name="attending" value="no" /><span>Regretfully decline</span></label>
+            <label class="pill"><input type="radio" name="attending" value="yes" checked /><span data-i18n="rsvp.yes">Joyfully accept</span></label>
+            <label class="pill"><input type="radio" name="attending" value="no" /><span data-i18n="rsvp.no">Regretfully decline</span></label>
           </div>
         </div>
 
         <label>
-          <span>A wish for the couple <em>(optional)</em></span>
-          <textarea name="message" rows="3" placeholder="Write something sweet…"></textarea>
+          <span data-i18n="rsvp.wish">A wish for the couple <em>(optional)</em></span>
+          <textarea name="message" rows="3" placeholder="Write something sweet…" data-i18n-ph="rsvp.wishPh"></textarea>
         </label>
 
-        <button type="submit" class="btn btn-glow full">Send my RSVP</button>
+        <button type="submit" class="btn btn-glow full" data-i18n="rsvp.send">Send my RSVP</button>
         <p class="form-note" id="formNote"></p>
       </form>
     </div>
@@ -238,21 +245,21 @@
   <section class="wishes" id="wishes">
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow dark">From our loved ones</p>
-        <h2>Wishes for the couple</h2>
+        <p class="eyebrow dark" data-i18n="wishes.eyebrow">From our loved ones</p>
+        <h2 data-i18n="wishes.title">Wishes for the couple</h2>
         <p class="muted" id="wishCount"></p>
       </div>
       <div class="wish-grid" id="wishGrid"></div>
-      <p class="wish-empty" id="wishEmpty" hidden>Be the first to leave a wish ♡</p>
+      <p class="wish-empty" id="wishEmpty" hidden data-i18n="wishes.empty">Be the first to leave a wish ♡</p>
     </div>
   </section>
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
     <p class="footer-mono" lang="ar">ح ♡ م</p>
-    <p class="footer-names">Mohamed &amp; Habiba</p>
-    <p class="footer-date">20 · 11 · 2026</p>
-    <p class="footer-small">Made with love for the happy couple</p>
+    <p class="footer-names" data-i18n="names">Mohamed &amp; Habiba</p>
+    <p class="footer-date" data-i18n="date.short">20 · 11 · 2026</p>
+    <p class="footer-small" data-i18n="footer.love">Made with love for the happy couple</p>
   </footer>
 
   <!-- ============ LIGHTBOX ============ -->
@@ -263,6 +270,7 @@
     <button class="lb-next" aria-label="Next">›</button>
   </div>
 
+  <script src="i18n.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
