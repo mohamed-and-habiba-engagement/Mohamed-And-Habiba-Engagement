@@ -105,8 +105,7 @@ const I18N = (() => {
   const pad = (n) => (lang === "ar" ? num(String(n).padStart(2, "0")).padStart(2, "٠") : String(n).padStart(2, "0"));
 
   function apply() {
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    document.documentElement.lang = lang; // layout stays the same; only the text changes
     document.querySelectorAll("[data-i18n]").forEach((el) => { el.innerHTML = t(el.dataset.i18n); });
     document.querySelectorAll("[data-i18n-ph]").forEach((el) => { el.placeholder = t(el.dataset.i18nPh); });
     document.querySelectorAll(".lang-switch button").forEach((b) => {

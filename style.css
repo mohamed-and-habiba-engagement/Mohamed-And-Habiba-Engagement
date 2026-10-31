@@ -375,53 +375,57 @@ section { position: relative; padding: 110px 0; }
 .lang-switch span { opacity: .35; }
 .cover-lang { position: absolute; top: 22px; inset-inline-end: 5%; z-index: 3; }
 
-/* ---------- Arabic (right-to-left) ---------- */
-html[dir="rtl"] body { font-family: "Amiri", var(--serif); line-height: 1.9; }
-html[dir="rtl"] *:not(.lang-switch):not(.lang-switch *) { letter-spacing: 0 !important; text-transform: none !important; }
-html[dir="rtl"] .eyebrow,
-html[dir="rtl"] .btn,
-html[dir="rtl"] .nav-links a,
-html[dir="rtl"] .card-label,
-html[dir="rtl"] .countdown small,
-html[dir="rtl"] .ref,
-html[dir="rtl"] .cover-hint,
-html[dir="rtl"] .hero-date,
-html[dir="rtl"] .footer-date,
-html[dir="rtl"] .wish-time,
-html[dir="rtl"] .rsvp-form label > span,
-html[dir="rtl"] .choice > span { font-family: "Cairo", var(--sans); }
-html[dir="rtl"] .eyebrow { font-size: .9rem; }
-html[dir="rtl"] .btn { font-size: .95rem; }
-html[dir="rtl"] .nav-links a { font-size: .9rem; }
-html[dir="rtl"] .countdown small { font-size: .8rem; }
-html[dir="rtl"] .rsvp-form label > span, html[dir="rtl"] .choice > span { font-size: .9rem; }
-html[dir="rtl"] .pill span { font-family: "Amiri", var(--serif) !important; }
+/* ---------- Arabic (same layout, Arabic fonts) ---------- */
+html[lang="ar"] body { font-family: "Amiri", var(--serif); line-height: 1.9; }
+html[lang="ar"] *:not(.lang-switch):not(.lang-switch *) { letter-spacing: 0 !important; text-transform: none !important; }
+html[lang="ar"] .eyebrow,
+html[lang="ar"] .btn,
+html[lang="ar"] .nav-links a,
+html[lang="ar"] .card-label,
+html[lang="ar"] .countdown small,
+html[lang="ar"] .ref,
+html[lang="ar"] .cover-hint,
+html[lang="ar"] .hero-date,
+html[lang="ar"] .footer-date,
+html[lang="ar"] .wish-time,
+html[lang="ar"] .rsvp-form label > span,
+html[lang="ar"] .choice > span { font-family: "Cairo", var(--sans); }
+html[lang="ar"] .eyebrow { font-size: .9rem; }
+html[lang="ar"] .btn { font-size: .95rem; }
+html[lang="ar"] .nav-links a { font-size: .9rem; }
+html[lang="ar"] .countdown small { font-size: .8rem; }
+html[lang="ar"] .rsvp-form label > span, html[lang="ar"] .choice > span { font-size: .9rem; }
+html[lang="ar"] .pill span { font-family: "Amiri", var(--serif) !important; }
 
-html[dir="rtl"] .names,
-html[dir="rtl"] .cover-names,
-html[dir="rtl"] .nav-mono,
-html[dir="rtl"] .signature,
-html[dir="rtl"] .wish-name,
-html[dir="rtl"] .footer-names,
-html[dir="rtl"] .story-photo figcaption,
-html[dir="rtl"] .polaroid span,
-html[dir="rtl"] .section-head h2 em,
-html[dir="rtl"] .countdown-done { font-family: var(--arabic); }
-html[dir="rtl"] .names { font-size: clamp(3rem, 7vw, 5rem); line-height: 1.35; }
-html[dir="rtl"] .names .amp { font-size: .6em; }
-html[dir="rtl"] .cover-names { font-size: clamp(2.2rem, 7vw, 3rem); }
-html[dir="rtl"] .nav-mono { font-size: 1.5rem; }
-html[dir="rtl"] .signature { font-size: 2rem; }
-html[dir="rtl"] .footer-names { font-size: 2.4rem; }
-html[dir="rtl"] .polaroid span { font-size: 1.2rem; }
-html[dir="rtl"] .story-photo figcaption { font-size: 1.5rem; }
-html[dir="rtl"] .section-head h2 em { font-size: 1.1em; }
-html[dir="rtl"] .section-head h2 { line-height: 1.4; }
-html[dir="rtl"] .story-text .lead { font-style: normal; line-height: 1.7; }
-html[dir="rtl"] .hero-sub { font-style: normal; }
-html[dir="rtl"] .translation { display: none; }
-html[dir="rtl"] .story-photo::before { inset: 22px 22px -22px -22px; }
-html[dir="rtl"] .wish-text::before { margin-right: 0; margin-left: 4px; }
+html[lang="ar"] .names,
+html[lang="ar"] .cover-names,
+html[lang="ar"] .nav-mono,
+html[lang="ar"] .signature,
+html[lang="ar"] .wish-name,
+html[lang="ar"] .footer-names,
+html[lang="ar"] .story-photo figcaption,
+html[lang="ar"] .polaroid span,
+html[lang="ar"] .section-head h2 em,
+html[lang="ar"] .countdown-done { font-family: var(--arabic); }
+html[lang="ar"] .names { font-size: clamp(3rem, 7vw, 5rem); line-height: 1.35; }
+html[lang="ar"] .names .amp { font-size: .6em; }
+html[lang="ar"] .cover-names { font-size: clamp(2.2rem, 7vw, 3rem); }
+html[lang="ar"] .nav-mono { font-size: 1.5rem; }
+html[lang="ar"] .signature { font-size: 2rem; }
+html[lang="ar"] .footer-names { font-size: 2.4rem; }
+html[lang="ar"] .polaroid span { font-size: 1.2rem; }
+html[lang="ar"] .story-photo figcaption { font-size: 1.5rem; }
+html[lang="ar"] .section-head h2 em { font-size: 1.1em; }
+html[lang="ar"] .section-head h2 { line-height: 1.4; }
+html[lang="ar"] .story-text .lead { font-style: normal; line-height: 1.7; }
+html[lang="ar"] .hero-sub { font-style: normal; }
+html[lang="ar"] .translation { display: none; }
+/* each Arabic line reads right-to-left (correct punctuation) while the page layout stays the same */
+html[lang="ar"] :is(p, h1, h2, a, label, figcaption, button, small, textarea, input, .names span, .polaroid span) { unicode-bidi: plaintext; }
+@media (min-width: 901px) {
+  html[lang="ar"] .hero-text { text-align: right; }
+  html[lang="ar"] .hero-date { margin-left: auto; }
+}
 
 /* ---------- Footer ---------- */
 .footer { background: var(--night); color: var(--cream); text-align: center; padding: 70px 20px 50px; border-top: 1px solid rgba(241, 220, 180, .12); }
