@@ -7,10 +7,11 @@ const CONFIG = {
   endTime: "23:00",
   timeLabel: "7:00 PM",        // shown on the page
 
-  venueName: "Venue to be announced",
-  venueArea: "Cairo, Egypt",
-  venueAddress: "Full address coming soon",
-  mapQuery: "Cairo, Egypt",    // what Google Maps searches for (name + area, or "lat,lng")
+  venueName: "Four Season Events Hall",
+  venueArea: "El Mokattam, Cairo",
+  venueAddress: "Street 9, Al Abageyah, El Mokattam — in front of Mokattam Sports Club, next to the Mobil station",
+  mapQuery: "30.0116942,31.3021322",                    // pin shown on the embedded map
+  mapLink: "https://maps.app.goo.gl/RkpUmjw7H2MU6k5XA", // "Open in Google Maps" button
 };
 
 /* =========================================================
@@ -34,8 +35,7 @@ document.querySelectorAll("[data-cfg]").forEach((el) => {
 
 const mapSrc = "https://www.google.com/maps?q=" + encodeURIComponent(CONFIG.mapQuery) + "&output=embed";
 document.getElementById("mapFrame").src = mapSrc;
-document.getElementById("mapBtn").href =
-  "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(CONFIG.mapQuery);
+document.getElementById("mapBtn").href = CONFIG.mapLink;
 
 const ymd = CONFIG.date.replace(/-/g, "");
 const hm = (t) => t.replace(":", "") + "00";
@@ -151,17 +151,11 @@ firebaseReady.catch((err) => console.warn("Firebase not connected:", err.message
 const form = document.getElementById("rsvpForm");
 const note = document.getElementById("formNote");
 const submitBtn = form.querySelector('button[type="submit"]');
-const guestsField = form.querySelector(".guests-field");
-
-form.querySelectorAll('input[name="attending"]').forEach((r) =>
-  r.addEventListener("change", () => guestsField.classList.toggle("hide", form.attending.value === "no"))
-);
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const name = form.elements["name"].value.trim().slice(0, 80);
   const attending = form.attending.value === "yes";
-  const guests = attending ? Number(form.guests.value) : 0;
   const message = form.message.value.trim().slice(0, 500);
   if (!name) return;
 
@@ -171,13 +165,12 @@ form.addEventListener("submit", async (e) => {
     const { db, fs } = await firebaseReady;
     const createdAt = fs.serverTimestamp();
     // Private RSVP list — only visible to you in the Firebase console
-    await fs.addDoc(fs.collection(db, "rsvps"), { name, attending, guests, message, createdAt });
+    await fs.addDoc(fs.collection(db, "rsvps"), { name, attending, message, createdAt });
     // Public wishes wall — only the name and the wish are shown
     if (message) await fs.addDoc(fs.collection(db, "wishes"), { name, message, createdAt });
 
     note.textContent = attending ? "Thank you! We can't wait to see you ♡" : "Thank you for letting us know ♡";
     form.reset();
-    guestsField.classList.remove("hide");
     if (message) document.getElementById("wishes").scrollIntoView({ behavior: "smooth" });
   } catch (err) {
     console.error(err);

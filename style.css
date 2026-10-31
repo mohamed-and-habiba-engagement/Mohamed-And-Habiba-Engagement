@@ -330,13 +330,12 @@ section { position: relative; padding: 110px 0; }
   padding: 13px 10px;
   border-radius: 12px;
   border: 1px solid rgba(241, 220, 180, .25);
-  font-size: 1.05rem; text-transform: none !important; letter-spacing: 0 !important; font-family: var(--serif) !important; color: var(--cream) !important;
+  font-size: 1.05rem !important; text-transform: none !important; letter-spacing: 0 !important; font-family: var(--serif) !important; color: var(--cream) !important;
   transition: all .3s;
   cursor: pointer;
 }
 .pill input:checked + span { background: var(--rose); border-color: var(--rose); color: #fff !important; }
 .pill input:focus-visible + span { box-shadow: 0 0 0 3px rgba(255, 210, 122, .35); }
-.guests-field.hide { display: none; }
 .form-note { text-align: center; font-style: italic; color: var(--champagne); min-height: 1.2em; }
 
 /* ---------- Wishes wall ---------- */
