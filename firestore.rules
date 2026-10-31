@@ -1,0 +1,44 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Private RSVP list: guests can only ADD. Nobody can read/edit/delete from the website.
+    // You (the owner) still see everything in the Firebase console.
+    match /rsvps/{id} {
+      allow read, update, delete: if false;
+      allow create: if request.resource.data.keys().hasOnly(['name', 'attending', 'guests', 'message', 'createdAt'])
+        && request.resource.data.keys().hasAll(['name', 'attending', 'guests', 'message', 'createdAt'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 80
+        && request.resource.data.attending is bool
+        && request.resource.data.guests is int
+        && request.resource.data.guests >= 0
+        && request.resource.data.guests <= 5
+        && request.resource.data.message is string
+        && request.resource.data.message.size() <= 500
+        && request.resource.data.createdAt == request.time;
+    }
+
+    // Public wishes wall: anyone can read and add. Nobody can edit/delete from the website.
+    match /wishes/{id} {
+      allow read: if true;
+      allow update, delete: if false;
+      allow create: if request.resource.data.keys().hasOnly(['name', 'message', 'createdAt'])
+        && request.resource.data.keys().hasAll(['name', 'message', 'createdAt'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 80
+        && request.resource.data.message is string
+        && request.resource.data.message.size() > 0
+        && request.resource.data.message.size() <= 500
+        && request.resource.data.createdAt == request.time;
+    }
+
+    // Everything else is locked.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
